@@ -1,2 +1,19 @@
-.col-md-12
-    | This is the dashboard view.
+div(ng-include='"components/navbar/navbar.html"')
+
+header#banner.hero-unit
+  .container
+    h2 Demo dashboard for withings-lib
+
+.container
+  .row
+    .col-lg-6
+      h1.page-header Steps:
+    .col-lg-6
+      h1.page-header Weight:
+
+footer.footer
+  .container
+    p
+      | withings-lib v0.1.1
+      = ' | '
+      a(href='https://github.com/amida-tech/withings-lib/issues?state=open') Issues
