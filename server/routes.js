@@ -19,7 +19,8 @@ module.exports = function(app) {
       // Create an API client and start authentication via OAuth
       var options = {
           consumerKey: config.CONSUMER_KEY,
-          consumerSecret: config.CONSUMER_SECRET
+          consumerSecret: config.CONSUMER_SECRET,
+          callbackUrl: config.CALLBACK_URL
       };
       var client = new Withings(options);
 
@@ -33,7 +34,7 @@ module.exports = function(app) {
               requestTokenSecret: tokenSecret
           };
 
-          res.redirect(client.authorizeUrl(token, tokenSecret));
+          res.send(client.authorizeUrl(token, tokenSecret));
       });
   });
 

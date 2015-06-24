@@ -40,7 +40,11 @@ var all = {
       }
     }
   },
-
+  
+  // Withings OAuth keys
+  CONSUMER_KEY: process.env.CONSUMER_KEY,
+  CONSUMER_SECRET: process.env.CONSUMER_SECRET,
+  CALLBACK_URL: process.env.CALLBACK_URL
 };
 
 // Export the config object based on the NODE_ENV
