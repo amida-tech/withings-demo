@@ -7,7 +7,8 @@
 var errors = require('./components/errors');
 var config = require('./config/environment');
 
-var Withings = require('withings-lib')
+var Withings = require('withings-lib');
+var moment = require('moment');
 
 module.exports = function(app) {
 
@@ -40,8 +41,10 @@ module.exports = function(app) {
 
   // On return from the authorization
   app.get('/oauth_callback', function (req, res) {
-      var verifier = req.query.oauth_verifier
-      var oauthSettings = req.session.oauth
+      var verifier = req.query.oauth_verifier;
+      var userid = req.query.userid;
+      var oauthSettings = req.session.oauth;
+      oauthSettings.userid = userid;
       var options = {
           consumerKey: config.CONSUMER_KEY,
           consumerSecret: config.CONSUMER_SECRET
@@ -54,10 +57,10 @@ module.exports = function(app) {
               if (err) {
                   throw new Error(err);
               }
-
+              
               oauthSettings.accessToken = token;
               oauthSettings.accessTokenSecret = secret;
-
+              console.log('SESSION INFO:', req.session.oauth);
               res.redirect('/activity');
           }
           );
@@ -69,16 +72,21 @@ module.exports = function(app) {
           consumerKey: config.CONSUMER_KEY,
           consumerSecret: config.CONSUMER_SECRET,
           accessToken: req.session.oauth.accessToken,
-          accessTokenSecret: req.session.oauth.accessTokenSecret
+          accessTokenSecret: req.session.oauth.accessTokenSecret,
+          wbsUrl: 'https://wbsapi.withings.net/'
       };
       var client = new Withings(options);
-
-      client.get('measure', 'getactivity', { userid: 'amida' }, function (err, data) {
+      var params = { 
+          userid: req.session.oauth.userid,
+          startdate: moment('2010-12-28', 'YYYY-MM-DD').unix(),
+          enddate:  moment('2015-06-25', 'YYYY-MM-DD').unix(),
+      };
+      console.log('Params:', params);
+      client.get('measure', 'getmeas', params, function (err, data) {
           if (err) {
-              // Throw error
-              return;
+              throw new Error(err);
           }
-
+          console.log(data);
           res.send('Activity log: ' + data.body);
       });
   });
