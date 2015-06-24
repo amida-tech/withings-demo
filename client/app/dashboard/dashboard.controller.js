@@ -10,4 +10,12 @@ angular.module('withingsDemoApp')
         });
     };
     
+    $http.get('/api/steps').success(function(res) {
+        $scope.stepsRes = res;
+    });
+    
+    $http.get('/api/weight').success(function(res) {
+        $scope.weightRes = res;
+    });
+    
   });
