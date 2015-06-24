@@ -13,6 +13,8 @@ var moment = require('moment');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/weight', require('./api/weight'));
+  app.use('/api/steps', require('./api/step'));
   app.use('/api/things', require('./api/thing'));
 
   // OAuth flow
