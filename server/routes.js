@@ -47,7 +47,8 @@ module.exports = function(app) {
       oauthSettings.userid = userid;
       var options = {
           consumerKey: config.CONSUMER_KEY,
-          consumerSecret: config.CONSUMER_SECRET
+          consumerSecret: config.CONSUMER_SECRET,
+          callbackUrl: config.CALLBACK_URL
       };
       var client = new Withings(options);
 
@@ -60,7 +61,7 @@ module.exports = function(app) {
               
               oauthSettings.accessToken = token;
               oauthSettings.accessTokenSecret = secret;
-              console.log('SESSION INFO:', req.session.oauth);
+
               res.redirect('/activity');
           }
           );
@@ -71,6 +72,7 @@ module.exports = function(app) {
       var options = {
           consumerKey: config.CONSUMER_KEY,
           consumerSecret: config.CONSUMER_SECRET,
+          callbackUrl: config.CALLBACK_URL,
           accessToken: req.session.oauth.accessToken,
           accessTokenSecret: req.session.oauth.accessTokenSecret,
           wbsUrl: 'https://wbsapi.withings.net/'
@@ -78,16 +80,15 @@ module.exports = function(app) {
       var client = new Withings(options);
       var params = { 
           userid: req.session.oauth.userid,
-          startdate: moment('2010-12-28', 'YYYY-MM-DD').unix(),
+          startdate: moment('2015-06-01', 'YYYY-MM-DD').unix(),
           enddate:  moment('2015-06-25', 'YYYY-MM-DD').unix(),
       };
-      console.log('Params:', params);
+
       client.get('measure', 'getmeas', params, function (err, data) {
           if (err) {
               throw new Error(err);
           }
-          console.log(data);
-          res.send('Activity log: ' + data.body);
+          res.send('Activity log: ' + data);
       });
   });
   
