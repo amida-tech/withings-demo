@@ -23,7 +23,8 @@ exports.index = function(req, res) {
       var params = { 
           userid: req.session.oauth.userid,
           startdate: moment('2015-06-01', 'YYYY-MM-DD').unix(),
-          enddate:  moment('2015-06-25', 'YYYY-MM-DD').unix(),
+          enddate:  moment('2015-06-30', 'YYYY-MM-DD').unix(),
+          meastype: 1
       };
 
       client.get('measure', 'getmeas', params, function (err, data) {

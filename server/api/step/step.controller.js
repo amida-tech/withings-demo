@@ -17,16 +17,16 @@ exports.index = function(req, res) {
           callbackUrl: config.CALLBACK_URL,
           accessToken: req.session.oauth.accessToken,
           accessTokenSecret: req.session.oauth.accessTokenSecret,
-          wbsUrl: 'https://wbsapi.withings.net/'
+          wbsUrl: 'https://wbsapi.withings.net/v2/'
       };
       var client = new Withings(options);
       var params = { 
           userid: req.session.oauth.userid,
-          startdate: moment('2015-06-01', 'YYYY-MM-DD').unix(),
-          enddate:  moment('2015-06-25', 'YYYY-MM-DD').unix(),
+          startdateymd: '2015-06-01',
+          enddateymd: '2015-06-30'
       };
 
-      client.get('measure', 'getmeas', params, function (err, data) {
+      client.get('measure', 'getactivity', params, function (err, data) {
           if (err) {
               throw new Error(err);
           }
