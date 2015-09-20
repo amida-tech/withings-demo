@@ -16,6 +16,7 @@ module.exports = function(app) {
   app.use('/api/weight', require('./api/weight'));
   app.use('/api/steps', require('./api/step'));
   app.use('/api/things', require('./api/thing'));
+  app.use('/api/calories', require('./api/calories'));
 
   // OAuth flow
   app.get('/oauth', function (req, res) {

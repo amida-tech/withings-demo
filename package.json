@@ -18,7 +18,7 @@
     "moment": "^2.10.3",
     "morgan": "~1.0.0",
     "serve-favicon": "~2.0.1",
-    "withings-lib": "~0.1.0"
+    "withings-lib": "~0.2.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

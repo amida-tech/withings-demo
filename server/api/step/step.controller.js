@@ -17,7 +17,6 @@ exports.index = function(req, res) {
           callbackUrl: config.CALLBACK_URL,
           accessToken: req.session.oauth.accessToken,
           accessTokenSecret: req.session.oauth.accessTokenSecret,
-          wbsUrl: 'https://wbsapi.withings.net/v2/'
       };
       var client = new Withings(options);
       var params = { 
@@ -27,6 +26,29 @@ exports.index = function(req, res) {
       };
 
       client.get('measure', 'getactivity', params, function (err, data) {
+          if (err) {
+              throw new Error(err);
+          }
+          res.send(data);
+          return;
+      });
+};
+
+exports.today = function(req, res) {
+  if (!req.session.oauth) {
+      res.send("Please authorize first");
+      return;
+  }
+  var options = {
+          consumerKey: config.CONSUMER_KEY,
+          consumerSecret: config.CONSUMER_SECRET,
+          callbackUrl: config.CALLBACK_URL,
+          accessToken: req.session.oauth.accessToken,
+          accessTokenSecret: req.session.oauth.accessTokenSecret,
+      };
+      var client = new Withings(options);
+
+      client.getDailySteps(new Date(), function (err, data) {
           if (err) {
               throw new Error(err);
           }

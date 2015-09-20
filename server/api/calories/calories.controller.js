@@ -5,8 +5,7 @@ var config = require('../../config/environment');
 var moment = require('moment');
 var _ = require('lodash');
 
-// Get list of weights
-exports.index = function(req, res) {
+exports.today = function(req, res) {
   if (!req.session.oauth) {
       res.send("Please authorize first");
       return;
@@ -19,14 +18,9 @@ exports.index = function(req, res) {
           accessTokenSecret: req.session.oauth.accessTokenSecret,
       };
       var client = new Withings(options);
-      var params = { 
-          userid: req.session.oauth.userid,
-          startdate: moment('2015-06-01', 'YYYY-MM-DD').unix(),
-          enddate:  moment('2015-06-30', 'YYYY-MM-DD').unix(),
-          meastype: 1
-      };
 
-      client.get('measure', 'getmeas', params, function (err, data) {
+      client.getDailyCalories(new Date(), function (err, data) {
+          console.log(data);
           if (err) {
               throw new Error(err);
           }
