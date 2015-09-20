@@ -6,7 +6,6 @@
 
 var express = require('express');
 var gzippo  = require('gzippo');
-var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var compression = require('compression');
 var bodyParser = require('body-parser');
