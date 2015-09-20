@@ -14,10 +14,19 @@ header#banner.hero-unit
       h1.page-header Weight:
       pre
         p {{weightRes}}
+  .row
+    .col-lg-6
+      h1.page-header Daily steps:
+      pre
+        p {{dailyStepsRes}}
+    .col-lg-6
+      h1.page-header Daily calories:
+      pre
+        p {{dailyCalsRes}}
 
 footer.footer
   .container
     p
-      | withings-lib v0.1.1
+      | withings-lib v0.2.2
       = ' | '
       a(href='https://github.com/amida-tech/withings-lib/issues?state=open') Issues

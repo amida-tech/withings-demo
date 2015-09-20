@@ -18,4 +18,12 @@ angular.module('withingsDemoApp')
         $scope.weightRes = res;
     });
     
+    $http.get('/api/steps/today').success(function(res) {
+        $scope.dailyStepsRes = res;
+    });
+    
+    $http.get('/api/calories/today').success(function(res) {
+        $scope.dailyCalsRes = res;
+    });
+    
   });
