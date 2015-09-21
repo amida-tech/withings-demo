@@ -16,7 +16,7 @@ exports.today = function(req, res) {
           callbackUrl: config.CALLBACK_URL,
           accessToken: req.session.oauth.accessToken,
           accessTokenSecret: req.session.oauth.accessTokenSecret,
-          userID: req.query.userid
+          userID: req.query.userID
       };
       var client = new Withings(options);
 
