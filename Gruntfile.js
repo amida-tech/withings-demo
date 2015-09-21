@@ -486,7 +486,7 @@ module.exports = function (grunt) {
           src: [
             '{app,components}/**/*.jade'
           ],
-          dest: '.tmp',
+          dest: 'client',
           ext: '.html'
         }]
       }
