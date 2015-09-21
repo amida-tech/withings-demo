@@ -4,7 +4,7 @@ angular.module('withingsDemoApp')
   .controller('DashboardCtrl', function ($scope, $http, $window, $routeParams) {
     $scope.message = 'Hello';
     
-    var userid = $routeParams.userID;
+    $scope.userid = $routeParams.userID;
     
     $scope.oauth = function () {
         $http.get('/oauth').success(function(res) {
@@ -12,20 +12,26 @@ angular.module('withingsDemoApp')
         });
     };
     
-    $http.get('/api/steps?userID=' + userid).success(function(res) {
-        $scope.stepsRes = res;
-    });
+    activate();
     
-    $http.get('/api/weight?userID=' + userid).success(function(res) {
-        $scope.weightRes = res;
-    });
+    function activate() {
+
+        $http.get('/api/steps?userID=' + userid).success(function (res) {
+            $scope.stepsRes = res;
+        });
+
+        $http.get('/api/weight?userID=' + userid).success(function (res) {
+            $scope.weightRes = res;
+        });
+
+        $http.get('/api/steps/today?userID=' + userid).success(function (res) {
+            $scope.dailyStepsRes = res;
+        });
+
+        $http.get('/api/calories/today?userID=' + userid).success(function (res) {
+            $scope.dailyCalsRes = res;
+        });
     
-    $http.get('/api/steps/today?userID=' + userid).success(function(res) {
-        $scope.dailyStepsRes = res;
-    });
-    
-    $http.get('/api/calories/today?userID=' + userid).success(function(res) {
-        $scope.dailyCalsRes = res;
-    });
+    }
     
   });
