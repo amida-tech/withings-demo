@@ -5,8 +5,7 @@ angular.module('withingsDemoApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap',
-  'ngRoute'
+  'ui.bootstrap'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

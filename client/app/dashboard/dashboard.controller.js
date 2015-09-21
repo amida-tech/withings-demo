@@ -1,18 +1,16 @@
 'use strict';
 
 angular.module('withingsDemoApp')
-  .controller('DashboardCtrl', function ($scope, $http, $window, $routeParams) {
+  .controller('DashboardCtrl', function ($scope, $http, $window, $location) {
     $scope.message = 'Hello';
     
-    $scope.userid = $routeParams.userID;
+    $scope.userid = $location.search().userID;
     
     $scope.oauth = function () {
         $http.get('/oauth').success(function(res) {
            $window.location.href = res;
         });
     };
-    
-    activate();
     
     function activate() {
 
@@ -33,5 +31,7 @@ angular.module('withingsDemoApp')
         });
     
     }
+    
+    activate();
     
   });
