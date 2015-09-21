@@ -9,7 +9,7 @@ angular.module('withingsDemoApp', [
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .when('/', '/dashboard')
+      .when('/?userID', '/dashboard?userID')
       .otherwise('/dashboard');
 
     $locationProvider.html5Mode(true);

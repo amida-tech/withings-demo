@@ -65,7 +65,7 @@ module.exports = function(app) {
               oauthSettings.accessToken = token;
               oauthSettings.accessTokenSecret = secret;
 
-              res.redirect('/');
+              res.redirect('/dashboard?userID=' + userid);
           }
           );
   });
