@@ -5,7 +5,6 @@
 'use strict';
 
 var express = require('express');
-var gzippo  = require('gzippo');
 var morgan = require('morgan');
 var compression = require('compression');
 var bodyParser = require('body-parser');
@@ -19,7 +18,6 @@ var config = require('./environment');
 module.exports = function(app) {
   var env = app.get('env');
 
-  app.use(gzippo.staticGzip("" + __dirname + "/dist"));
   app.set('views', config.root + '/server/views');
   app.set('view engine', 'jade');
   app.use(compression());
