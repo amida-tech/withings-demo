@@ -21,7 +21,6 @@ exports.index = function(req, res) {
       };
       var client = new Withings(options);
       var params = { 
-          userid: req.session.oauth.userid,
           startdateymd: '2015-06-01',
           enddateymd: '2015-06-30'
       };
