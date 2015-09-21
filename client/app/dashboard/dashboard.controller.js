@@ -16,19 +16,19 @@ angular.module('withingsDemoApp')
     
     function activate() {
 
-        $http.get('/api/steps?userID=' + userid).success(function (res) {
+        $http.get('/api/steps?userID=' + $scope.userid).success(function (res) {
             $scope.stepsRes = res;
         });
 
-        $http.get('/api/weight?userID=' + userid).success(function (res) {
+        $http.get('/api/weight?userID=' + $scope.userid).success(function (res) {
             $scope.weightRes = res;
         });
 
-        $http.get('/api/steps/today?userID=' + userid).success(function (res) {
+        $http.get('/api/steps/today?userID=' + $scope.userid).success(function (res) {
             $scope.dailyStepsRes = res;
         });
 
-        $http.get('/api/calories/today?userID=' + userid).success(function (res) {
+        $http.get('/api/calories/today?userID=' + $scope.userid).success(function (res) {
             $scope.dailyCalsRes = res;
         });
     
