@@ -54,6 +54,7 @@ exports.today = function(req, res) {
           if (err) {
               throw new Error(err);
           }
+          console.log("Daily steps:", err, data);
           res.send(data);
           return;
       });
