@@ -12,26 +12,29 @@ exports.index = function(req, res) {
       return;
   }
   var options = {
-          consumerKey: config.CONSUMER_KEY,
-          consumerSecret: config.CONSUMER_SECRET,
-          callbackUrl: config.CALLBACK_URL,
-          accessToken: req.session.oauth.accessToken,
-          accessTokenSecret: req.session.oauth.accessTokenSecret,
-          userID: req.query.userID
-      };
-      var client = new Withings(options);
-      var params = { 
-          startdateymd: '2015-06-01',
-          enddateymd: '2015-06-30'
-      };
+      consumerKey: config.CONSUMER_KEY,
+      consumerSecret: config.CONSUMER_SECRET,
+      callbackUrl: config.CALLBACK_URL,
+      accessToken: req.session.oauth.accessToken,
+      accessTokenSecret: req.session.oauth.accessTokenSecret,
+      userID: req.query.userID
+  };
+  var client = new Withings(options);
+  var date = new Date();
+  var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+  var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  var params = {
+      startdateymd: firstDay,
+      enddateymd: lastDay
+  };
 
-      client.get('measure', 'getactivity', params, function (err, data) {
-          if (err) {
-              throw new Error(err);
-          }
-          res.send(data);
-          return;
-      });
+  client.get('measure', 'getactivity', params, function (err, data) {
+      if (err) {
+          throw new Error(err);
+      }
+      res.send(data);
+      return;
+  });
 };
 
 exports.today = function(req, res) {
@@ -40,20 +43,20 @@ exports.today = function(req, res) {
       return;
   }
   var options = {
-          consumerKey: config.CONSUMER_KEY,
-          consumerSecret: config.CONSUMER_SECRET,
-          callbackUrl: config.CALLBACK_URL,
-          accessToken: req.session.oauth.accessToken,
-          accessTokenSecret: req.session.oauth.accessTokenSecret,
-          userID: req.query.userID
-      };
-      var client = new Withings(options);
+      consumerKey: config.CONSUMER_KEY,
+      consumerSecret: config.CONSUMER_SECRET,
+      callbackUrl: config.CALLBACK_URL,
+      accessToken: req.session.oauth.accessToken,
+      accessTokenSecret: req.session.oauth.accessTokenSecret,
+      userID: req.query.userID
+  };
+  var client = new Withings(options);
 
-      client.getDailySteps(new Date(), function (err, data) {
-          if (err) {
-              throw new Error(err);
-          }
-          res.send(data);
-          return;
-      });
+  client.getDailySteps(new Date(), function (err, data) {
+      if (err) {
+          throw new Error(err);
+      }
+      res.send(data);
+      return;
+  });
 };
